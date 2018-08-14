@@ -417,7 +417,7 @@ GameObject:
   m_Layer: 0
   m_Name: Waypoint (3)
   m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1025,7 +1025,7 @@ GameObject:
   m_Layer: 0
   m_Name: Waypoint (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5161,11 +5161,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4180605587173952, guid: feb5f6113f4fe8742b334a11056b9864, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.39
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4180605587173952, guid: feb5f6113f4fe8742b334a11056b9864, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.07
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 4180605587173952, guid: feb5f6113f4fe8742b334a11056b9864, type: 2}
       propertyPath: m_LocalRotation.x
@@ -5186,6 +5186,28 @@ Prefab:
     - target: {fileID: 4180605587173952, guid: feb5f6113f4fe8742b334a11056b9864, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114284213823415312, guid: feb5f6113f4fe8742b334a11056b9864,
+        type: 2}
+      propertyPath: cameraCollision
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114208219754911550, guid: feb5f6113f4fe8742b334a11056b9864,
+        type: 2}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1801666342}
+    - target: {fileID: 4568215774537416, guid: feb5f6113f4fe8742b334a11056b9864, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.111546755
+      objectReference: {fileID: 0}
+    - target: {fileID: 4568215774537416, guid: feb5f6113f4fe8742b334a11056b9864, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -6.1178074
+      objectReference: {fileID: 0}
+    - target: {fileID: 4568215774537416, guid: feb5f6113f4fe8742b334a11056b9864, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 65834955450613116, guid: feb5f6113f4fe8742b334a11056b9864, type: 2}
@@ -5620,7 +5642,7 @@ GameObject:
   m_Layer: 0
   m_Name: Waypoint (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6217,6 +6239,30 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4721076310625710, guid: 837e1e7f1ada43d4599104d917de81b6,
     type: 2}
   m_PrefabInternal: {fileID: 1359363667}
+--- !u!1 &1463781051 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1231613370286594, guid: feb5f6113f4fe8742b334a11056b9864,
+    type: 2}
+  m_PrefabInternal: {fileID: 953956962}
+--- !u!114 &1463781053 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114208219754911550, guid: feb5f6113f4fe8742b334a11056b9864,
+    type: 2}
+  m_PrefabInternal: {fileID: 953956962}
+  m_Script: {fileID: 11500000, guid: 447b11d504113e041a355618e092b09d, type: 3}
+--- !u!114 &1463781057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1463781051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5897f8c275c107c4d956490e573a52d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1463781053}
+  cam: {fileID: 1801666343}
 --- !u!43 &1474821045
 Mesh:
   m_ObjectHideFlags: 0
@@ -10360,6 +10406,17 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!4 &1801666342 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4568215774537416, guid: feb5f6113f4fe8742b334a11056b9864,
+    type: 2}
+  m_PrefabInternal: {fileID: 953956962}
+--- !u!114 &1801666343 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114284213823415312, guid: feb5f6113f4fe8742b334a11056b9864,
+    type: 2}
+  m_PrefabInternal: {fileID: 953956962}
+  m_Script: {fileID: 11500000, guid: d90c384c3cc5b7947afc0370e86a2b00, type: 3}
 --- !u!1001 &1893098227
 Prefab:
   m_ObjectHideFlags: 0
