@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     public Transform cam;
 
+
     // Update is called once per frame
     void Update()
     {

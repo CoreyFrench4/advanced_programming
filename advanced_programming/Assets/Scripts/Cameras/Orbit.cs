@@ -9,16 +9,16 @@ public class Orbit : MonoBehaviour
     
     public float xSpeed = 120.0f;
     public float ySpeed = 120.0f;
-    public bool cameraCollision = false;
 
     public float yMinLimit = -20f;
     public float yMaxLimit = 80f;
 
+    public bool cameraCollision = false;
     public float rayDistance = 1000f;
-    public Vector3 originalOffset;
-    
     public Vector3 offset = new Vector3(0f, 1f, 0f);
     public float distance = 5f;
+
+    private Vector3 originalOffset;
     private float x = 0.0f;
     private float y = 0.0f;
     public bool hidecursor = false;
@@ -41,8 +41,7 @@ public class Orbit : MonoBehaviour
         {
             if (cameraCollision)
             {
-                Ray camRay = new Ray(target.position, -transform.position);
-
+                Ray camRay = new Ray(target.position, -transform.forward);
                 RaycastHit hit;
                 if (Physics.Raycast(camRay, out hit, rayDistance, ~ignoreLayers, QueryTriggerInteraction.Ignore))
                 {
@@ -57,7 +56,6 @@ public class Orbit : MonoBehaviour
 
     public void Look(float mouseX, float mouseY)
     {
-
         x += mouseX * xSpeed * Time.deltaTime;
         y -= mouseY * ySpeed * Time.deltaTime;
 
@@ -65,8 +63,8 @@ public class Orbit : MonoBehaviour
 
         Quaternion rotation = Quaternion.Euler(y, x, 0);
         transform.rotation = rotation;
-
     }
+
     void LateUpdate()
     {
         if (target)

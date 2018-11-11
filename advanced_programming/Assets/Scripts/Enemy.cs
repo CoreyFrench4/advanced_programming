@@ -8,6 +8,11 @@ using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
+    public enum State
+    {
+        Patrol,
+        Seek
+    }
     // Property
     public int Health
     {
@@ -16,7 +21,8 @@ public class Enemy : MonoBehaviour
             return health;
         }
     }
-
+    public FieldOfView fov;
+    public State currentState = State.Patrol;
     public NavMeshAgent agent;
     public Transform target;
     public Transform waypointParent;
@@ -26,13 +32,20 @@ public class Enemy : MonoBehaviour
     private int health = 100;
     private int currentIndex = 1;
     private Transform[] waypoints;
-
+    public GameObject alertSymbol;
+    public AudioSource alertSound;
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);    
     }
+    IEnumerator SeekDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        currentState = State.Patrol;
 
+        target = null;
+    }
     void Start()
     {
         waypoints = waypointParent.GetComponentsInChildren<Transform>();
@@ -40,45 +53,73 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target)
+        switch (currentState)
         {
-            // Update the AI's target position
-            agent.SetDestination(target.position);
+            case State.Patrol:
+                Patrol();
+                break;
+            case State.Seek:
+                Seek();
+                break;
+            default:
+                break;
         }
-        else
-        {
-            if(currentIndex >= waypoints.Length)
-            {
-                currentIndex = 1;
-            }
 
-            Transform point = waypoints[currentIndex];
-
-            float distance = Vector3.Distance(transform.position, point.position);
-            if(distance <= distanceToWaypoint)
-            {
-                currentIndex++;
-            }
-
-            agent.SetDestination(point.position);
-        }
     }
-
-    void FixedUpdate()
+    void Patrol()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius);
-        foreach (var hit in hits)
+
+        if (currentIndex >= waypoints.Length)
         {
-            Player player = hit.GetComponent<Player>();
-            if (player)
-            {
-                target = player.transform;
-                return;
-            }
+            currentIndex = 1;
         }
 
-        target = null;
+        Transform point = waypoints[currentIndex];
+
+        float distance = Vector3.Distance(transform.position, point.position);
+        if (distance <= distanceToWaypoint)
+        {
+            currentIndex++;
+        }
+
+        agent.SetDestination(point.position);
+
+        if (fov.visibleTargets.Count >= 1)
+        {
+            target = fov.visibleTargets[0];
+
+            currentState = State.Seek;
+
+            alertSound.Play();
+            alertSymbol.SetActive(true);
+        }
     }
+    void Seek()
+    {
+        agent.SetDestination(target.position);
+        float disttoTarget = Vector3.Distance(transform.position, target.position);
+
+        if (disttoTarget >= detectionRadius)
+        {
+            StartCoroutine(SeekDelay());
+        }
+        
+    }
+    //void FixedUpdate()
+    //{
+    //    Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius);
+    //    foreach (var hit in hits)
+    //    {
+    //        Player player = hit.GetComponent<Player>();
+    //        if (player)
+    //        {
+    //            target = player.transform;
+    //            return;
+    //        }
+    //    }
+
+    //    target = null;
+    //}
 
     public void DealDamage(int damageDealt)
     {
